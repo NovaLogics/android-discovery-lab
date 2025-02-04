@@ -68,11 +68,166 @@ In this unit, I created my first Android project using Android Studio. The goal 
 
 ---
 
-### Next Steps
-- Explore the `MainActivity.kt` file to understand how Kotlin is used to define app behavior.
-- Modify the `activity_main.xml` file to customize the app’s layout.
-- Run the app on an emulator or physical device to see it in action.
+---
+
+## Getting Started with the first App
+
+1. **Understand the Code Structure**:
+    - Open `MainActivity.kt` in **Code View**.
+    - Notice the automatically generated functions:
+        - `onCreate()`: Entry point of the app.
+        - `setContent()`: Defines the layout using composable functions.
+
+2. **Key Functions**:
+    - `onCreate()`:
+        - Called when the app starts.
+        - Sets up the UI by calling `setContent()`.
+    - `setContent()`:
+        - Uses composable functions (marked with `@Composable`) to build the UI.
+
+3. **Composable Functions**:
+    - Annotated with `@Composable`.
+    - Function names are capitalized.
+    - Cannot return any value.
+    - Example:
+
+      ```kotlin
+      @Composable
+      fun Greeting(name: String, modifier: Modifier = Modifier) {
+          Text(text = "Hello $name!", modifier = modifier)
+      }
+      ```  
+
+4. **Update the Greeting Function**:
+    - Change the text to introduce yourself:
+
+      ```kotlin
+      @Composable
+      fun Greeting(name: String, modifier: Modifier = Modifier) {
+          Text(text = "Hi, my name is $name!", modifier = modifier)
+      }
+      ```  
+
+5. **Preview Your Changes**:
+    - Use the `GreetingPreview()` function to see your UI changes without running the app.
+    - Annotate with `@Preview` to enable previews in Android Studio.
+    - Example:
+
+      ```kotlin
+      @Preview(showBackground = true)
+      @Composable
+      fun GreetingPreview() {
+          AndroidDiscoveryLabTheme {
+              Greeting("Your Name")
+          }
+      }
+      ```  
+
+    - Set `showBackground = true` to add a background to the preview.
+
+6. **Personalize the Greeting**:
+    - Replace `"Android"` with your name in the `Greeting()` function.
+    - Rebuild the app to see your personalized greeting card.  
 
 ---
 
-This `README.md` is now complete and adheres to standard documentation practices. Feel free to expand it further as you progress through the course!
+---
+
+## Change the Background Color
+
+1. **Add a Surface to Your Text**:
+    - A `Surface` is a container that lets you modify UI appearance (e.g., background color, border).
+    - Surround the `Text` with a `Surface` using:
+        - **Windows:** Press `Alt + Enter`
+        - **Mac:** Press `Option + Enter`
+    - Select **"Surround with Container"** and replace `Box` with `Surface()`.
+
+2. **Modify the Surface Color**:
+    - Add a `color` parameter to `Surface`:
+
+      ```kotlin
+      @Composable
+      fun Greeting(name: String, modifier: Modifier = Modifier) {
+          Surface(color = Color) {
+              Text(
+                  text = "Hi, my name is $name!",
+                  modifier = modifier
+              )
+          }
+      }
+      ```  
+
+    - If `Color` is red (unresolved), add this import at the top:
+
+      ```kotlin
+      import androidx.compose.ui.graphics.Color
+      ```
+
+3. **Optimize Imports**:
+    - Keep imports organized alphabetically.
+    - Remove unused imports via:
+        - **Menu:** `Code > Optimize Imports`
+        - **Search:** `Help > Optimize Imports`
+
+4. **Select a Color**:
+    - Add a period (`.`) after `Color` to see suggestions.
+    - Choose a color, e.g., `Color.Cyan`:
+
+      ```kotlin
+      @Composable
+      fun Greeting(name: String, modifier: Modifier = Modifier) {
+         Surface(color = Color.Cyan) {
+             Text(
+                 text = "Hi, my name is $name!",
+                 modifier = modifier
+             )
+         }
+      }
+      ```  
+
+5. **Preview the Changes**:
+    - Check the updated background color in Android Studio’s preview.  
+
+---
+
+---
+
+## Add Padding
+
+1. **Use a Modifier for Padding**:
+    - A `Modifier` is used to style or position a composable.
+    - The `Modifier.padding()` function adds space around an element.
+
+2. **Apply Padding to Text**:
+    - Modify the `modifier` parameter to include `padding(24.dp)`:
+
+      ```kotlin
+      @Composable
+      fun Greeting(name: String, modifier: Modifier = Modifier) {
+          Surface(color = Color.Cyan) {
+              Text(
+                  text = "Hi, my name is $name!",
+                  modifier = modifier.padding(24.dp)
+              )
+          }
+      }
+      ```  
+
+3. **Import Required Dependencies**:
+    - Add these imports to the top of your file:
+
+      ```kotlin
+      import androidx.compose.ui.unit.dp
+      import androidx.compose.foundation.layout.padding
+      ```
+
+    - Optimize imports via:
+        - **Menu:** `Code > Optimize Imports`
+        - **Search:** `Help > Optimize Imports`
+
+4. **Experiment with Customization**:
+    - Try different colors and padding sizes to personalize your app.
+
+🎉 **Congratulations!** You've successfully built your first Android app using Jetpack Compose! 🚀  
+
+![Screen](./_archive/screenshots/screen-05.png)
