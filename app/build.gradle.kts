@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -37,7 +39,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         compose = true
@@ -50,64 +52,58 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
-    //Architecture
+    // AndroidX Core and Lifecycle
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.swipe.refresh.layout)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    //Compose
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.swipe.refresh.layout)
+    implementation(libs.androidx.core.splashscreen)
+
+    // Compose UI and Navigation
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigate.compose)
-    implementation(libs.androidx.hilt.compose)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.animation)
     implementation(libs.androidx.foundation)
-    //Room Database
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
+
+    // Room Database & DataStore
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-    //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    //OkHttp
-    implementation(libs.okHttp)
-    //Gson
-    implementation(libs.gson)
-    //Coil
-    implementation(libs.coil)
-    //Coroutines
-    implementation(libs.coroutine.core)
-    implementation(libs.coroutine.android)
-    //Material
-    implementation(libs.material)
-    //Hilt
-    implementation(libs.dagger.android)
-    ksp(libs.dagger.compiler)
-    ksp(libs.hilt.compiler)
-    //Palette
-    implementation(libs.androidx.palette.ktx)
-    //Splashscreen
-    implementation(libs.androidx.core.splashscreen)
-    //Accompanist Pager Indicators
-    implementation(libs.accompanist.pager.indicators)
-    //DataStore
     implementation(libs.datastore.preferences)
 
-    //Unit Test
+    // Material and UI Components
+    implementation(libs.material)
+    implementation(libs.androidx.material3)
+
+    // Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okHttp)
+    implementation(libs.gson)
+
+    // Dependency Injection
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    // Image Loading
+    implementation(libs.coil)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
