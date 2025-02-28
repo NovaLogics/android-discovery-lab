@@ -4,9 +4,16 @@ This repository documents my journey through the Android Developer guidelines us
 
 ---
 
+<br/>
+
 # Experiment Unit 01: Kotlin Coroutines
 In this unit, I explored Kotlin Coroutines to understand how they simplify asynchronous programming in Android. The goal was to learn how coroutines can handle background tasks efficiently without blocking the main thread, making apps faster and more responsive.
-![Screen](./_archive/kotlin-coroutine.png)
+
+<br/>
+
+<div align="center">
+<img src="./_archive/kotlin-coroutine.png" />
+</div>
 
 ---
 
@@ -41,7 +48,7 @@ In this unit, I explored Kotlin Coroutines to understand how they simplify async
     - They’re easy to use for tasks like downloading data, reading files, or updating the database.
 
 
----
+#
 
 
 ### Example in Real Life:
@@ -49,5 +56,11 @@ Imagine you’re running a coffee shop:
 - **Main Thread**: You’re taking orders and serving coffee.
 - **Coroutine**: Your helper is grinding coffee beans in the background while you keep serving customers.
 - If you didn’t have a helper (coroutine), you’d have to grind the beans yourself, and customers would wait longer.
+
+<br/>
+
+---
+
+<br/>
 
 ---
