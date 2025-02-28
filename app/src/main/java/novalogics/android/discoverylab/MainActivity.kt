@@ -1,3 +1,5 @@
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package novalogics.android.discoverylab
 
 import android.os.Bundle
@@ -19,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,6 +41,15 @@ class MainActivity : ComponentActivity() {
         //Test Kotlin Coroutines
         coroutineTestFunction()
     }
+}
+
+fun coroutineTestFunction(){
+
+    GlobalScope.launch {
+        delay(2000L)
+        Log.d(TAG, "Hello from COROUTINE | Thread : ${Thread.currentThread().name}")
+    }
+    Log.d(TAG, "Hello from thread | Thread : ${Thread.currentThread().name}")
 }
 
 @Composable
@@ -61,16 +73,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
         )
     }
-}
-
-
-fun coroutineTestFunction(){
-
-    GlobalScope.launch {
-        delay(2000L)
-        Log.d(TAG, "Hello from COROUTINE | Thread : ${Thread.currentThread().name}")
-    }
-    Log.d(TAG, "Hello from thread | Thread : ${Thread.currentThread().name}")
 }
 
 @Preview(showBackground = true)
