@@ -45,8 +45,8 @@ In this unit, I explored Kotlin Coroutines to understand how they simplify async
 
 5. **Why Learn Coroutines?**
     - They make your app faster and smoother.
+   
     - They’re easy to use for tasks like downloading data, reading files, or updating the database.
-
 
 #
 
@@ -54,7 +54,9 @@ In this unit, I explored Kotlin Coroutines to understand how they simplify async
 ### Example in Real Life:
 Imagine you’re running a coffee shop:
 - **Main Thread**: You’re taking orders and serving coffee.
+
 - **Coroutine**: Your helper is grinding coffee beans in the background while you keep serving customers.
+
 - If you didn’t have a helper (coroutine), you’d have to grind the beans yourself, and customers would wait longer.
 
 <br/>
@@ -67,43 +69,40 @@ Imagine you’re running a coffee shop:
 
 I learned how to launch my first Kotlin Coroutine in an Android app. The goal was to understand the basics of coroutines, including how to set them up, run them in the background, and observe their behavior compared to the main thread.
 
-
-
-
-
-
-### Experiment Unit 02: Launching Your First Coroutine
-
-In this unit, I learned how to launch my first **Kotlin Coroutine** in an Android app. The goal was to understand the basics of coroutines, including how to set them up, run them in the background, and observe their behavior compared to the main thread.
-
 ---
 
 #### Key Steps and Learnings:
 
 1. **Adding Coroutine Dependencies**:
     - Coroutines are not included in Kotlin by default, so I added the necessary dependencies in the `build.gradle` file:
+   
       ```gradle
       dependencies {
           implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"
           implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
       }
       ```  
+      
     - After syncing the project, I was ready to use coroutines.
 
 
 2. **Launching a Coroutine with `GlobalScope`**:
     - I used `GlobalScope.launch` to start a coroutine. This is the simplest way to launch a coroutine, but it’s **not the best practice** (more on this in later units).
+   
     - `GlobalScope` means the coroutine lives as long as the app does. If the app is closed, the coroutine is canceled.
 
 
 3. **Running Code in a Coroutine**:
     - Inside the `launch` block, I added code to log which thread the coroutine is running on:
+   
       ```kotlin
       GlobalScope.launch {
           Log.d(TAG, "Hello from COROUTINE | Thread : ${Thread.currentThread().name}")
       }
       ```  
+      
     - For comparison, I also logged a message from the main thread:
+   
       ```kotlin
       Log.d(TAG, "Hello from thread | Thread : ${Thread.currentThread().name}")
       ```  
@@ -112,8 +111,11 @@ In this unit, I learned how to launch my first **Kotlin Coroutine** in an Androi
 
 4. **Observing Thread Behavior**:
     - When I ran the app, the logs showed:
+   
         - `Hello from thread | Thread : main` (main thread).
+      
         - `Hello from COROUTINE | Thread : DefaultDispatcher-worker-1` (background thread).
+      
     - This confirmed that the coroutine runs on a separate thread, not blocking the main thread.
 
 5. **Using `delay` to Suspend a Coroutine**:
@@ -131,6 +133,7 @@ In this unit, I learned how to launch my first **Kotlin Coroutine** in an Androi
 
 6. **Coroutine Cancellation**:
     - If the main thread finishes (e.g., the app is closed), all coroutines are canceled, even if they are still running.
+   
     - Example: Increasing the delay to 5 seconds and closing the app before the coroutine finishes:
         - The log message from the coroutine is never printed because the coroutine is canceled when the app closes.
 
@@ -141,6 +144,3 @@ In this unit, I learned how to launch my first **Kotlin Coroutine** in an Androi
 - **`delay` is non-blocking**: It only pauses the coroutine, not the entire thread.
 - **Coroutines depend on the main thread**: If the main thread finishes, all coroutines are canceled.
 
-
-
----
