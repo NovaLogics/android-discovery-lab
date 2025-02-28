@@ -20,9 +20,11 @@ foundationComposeVersion = "1.7.3"
 composeNavigationVersion = "2.8.2"
 composeHiltNavigationVersion = "1.2.0"
 
-# Room Database & Datastore
+# Database & Datastore
 roomVersion = "2.6.1"
-datastore = "1.0.0"
+sqlCipherVersion = "4.5.3"
+sqliteKtxVersion = "2.3.1"
+datastoreVersion = "1.0.0"
 
 # Material and UI Components
 materialVersion = "1.12.0"
@@ -33,6 +35,7 @@ coroutineVersion = "1.9.0"
 # Networking
 retrofitVersion = "2.11.0"
 okHttpVersion = "4.12.0"
+okHttpLoggingVersion = "4.9.0"
 gsonVersion = "2.11.0"
 
 # Dependency Injection
@@ -70,16 +73,23 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+sqlcipher = { module = "net.zetetic:android-database-sqlcipher", version.ref = "sqlCipherVersion" }
+sqlite-ktx = { module = "androidx.sqlite:sqlite-ktx", version.ref = "sqliteKtxVersion" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreVersion" }
 
 # Material and UI Components
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+# Coroutine
+coroutine-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
+coroutine-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutineVersion" }
+
 # Networking
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttpVersion" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpLoggingVersion" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
 
 # Dependency Injection

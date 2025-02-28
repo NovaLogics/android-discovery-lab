@@ -76,21 +76,28 @@ dependencies {
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
 
-    // Room Database & DataStore
+    // Database & DataStore
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.sqlcipher)
+    implementation(libs.sqlite.ktx)
     implementation(libs.datastore.preferences)
 
     // Material and UI Components
     implementation(libs.material)
     implementation(libs.androidx.material3)
 
+    //Coroutines
+    implementation(libs.coroutine.core)
+    implementation(libs.coroutine.android)
+
     // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
-    implementation(libs.okHttp)
     implementation(libs.gson)
+    implementation(libs.okHttp)
+    implementation(libs.okhttp.logging.interceptor)
 
     // Dependency Injection
     implementation(libs.hilt.android)

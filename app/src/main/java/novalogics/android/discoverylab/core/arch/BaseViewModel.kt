@@ -1,8 +1,8 @@
-package novalogics.android.discoverylab.core.base
+package novalogics.android.discoverylab.core.arch
 
-import novalogics.android.discoverylab.core.base.state.ViewEffect
-import novalogics.android.discoverylab.core.base.state.ViewIntent
-import novalogics.android.discoverylab.core.base.state.ViewState
+import novalogics.android.discoverylab.core.arch.state.ViewEffect
+import novalogics.android.discoverylab.core.arch.state.ViewIntent
+import novalogics.android.discoverylab.core.arch.state.ViewUiState
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  */
 abstract class BaseViewModel<
         Intent : ViewIntent,
-        UiState : ViewState,
+        UiState : ViewUiState,
         Effect : ViewEffect
         >
     (initialState: UiState) : ViewModel() {

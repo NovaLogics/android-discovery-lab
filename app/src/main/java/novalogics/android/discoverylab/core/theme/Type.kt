@@ -1,4 +1,4 @@
-package novalogics.android.discoverylab.ui.theme
+package novalogics.android.discoverylab.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -96,8 +96,6 @@ val Typography = Typography(
         fontSize = 12.sp,
         lineHeight = 16.sp
     ),
-
-    // Button Style
     labelMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
