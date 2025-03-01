@@ -12,5 +12,15 @@ In this unit, I created my first Android project using Android Studio. The goal 
 #
 
 ### Experiment Units
-01: [**Kotlin Coroutines**](https://github.com/NovaLogics/android-discovery-lab/tree/expt/e001-kotlin-coroutines)  
-In this unit, I explored Kotlin Coroutines to understand how they simplify asynchronous programming in Android.
+
+#### 01: Kotlin Coroutines
+In this unit, I explored Kotlin Coroutines to understand how they simplify asynchronous programming in Android.  
+
+01: [**Kotlin Coroutines**](https://github.com/NovaLogics/android-discovery-lab/tree/expt/s001-u001-kotlin-coroutines)
+- Simple Explanation of Kotlin Coroutines | Launching Your First Coroutine
+
+02: [**Suspend Functions**](https://github.com/NovaLogics/android-discovery-lab/tree/expt/s001-u002-suspend-functions) 
+- This is especially useful for tasks like network calls or database operations. Explore more >>
+
+03: [**Coroutine Contexts and Dispatchers**](https://github.com/NovaLogics/android-discovery-lab/tree/expt/s001-u003-coroutine-contexts) 
+- Dispatchers define the thread or thread pool in which a coroutine runs, allowing us to control where tasks are executed. Explore more >>
