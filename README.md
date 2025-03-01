@@ -18,7 +18,7 @@ In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines
 
 ---
 
-#### Key Steps and Learnings:
+### Key Steps and Learnings:
 
 1. **What are Coroutine Contexts and Dispatchers?**
     - **Coroutine Context**: Defines the environment in which a coroutine runs, including the thread or dispatcher.
@@ -35,6 +35,7 @@ In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines
       
         - **newSingleThreadContext**: Creates a new single thread for coroutine execution.
 
+#
 
 2. **Using Dispatchers in Coroutines**:
     - I demonstrated how to launch coroutines with different dispatchers:
@@ -56,6 +57,7 @@ In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines
           Log.d(TAG, "COROUTINE | Thread : ${Thread.currentThread().name}")
       }
       ```  
+#
 
 3. **Switching Contexts with `withContext`**:
     - The `withContext` function allows us to switch the context of a coroutine.
@@ -76,6 +78,8 @@ In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines
           }
       }
       ```  
+
+#
 
 4. **Observing the Behavior**:
     - Logs show the coroutine running on different threads based on the dispatcher:
@@ -102,4 +106,4 @@ In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines
 - **`withContext`** allows easy switching between contexts, making it simple to perform background tasks and update the UI.
 - **`newSingleThreadContext`** is useful for creating custom threads for specific tasks.
 
----
+
