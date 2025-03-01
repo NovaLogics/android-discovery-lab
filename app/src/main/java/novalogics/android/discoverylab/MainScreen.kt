@@ -28,7 +28,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
         Text(
             text = "Welcome to Experiment Series" +
                     "\n\n" +
-                    "02 / Suspend Functions - Kotlin Coroutines",
+                    "03 / Coroutine Contexts - Kotlin Coroutines",
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.primary,

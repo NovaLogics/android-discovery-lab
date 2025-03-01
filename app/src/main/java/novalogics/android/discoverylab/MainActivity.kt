@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         //Test Kotlin Coroutines
-        testCoroutines()
+        testCoroutines(context = this)
     }
 }
 

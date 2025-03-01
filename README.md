@@ -6,9 +6,9 @@ This repository documents my journey through the Android Developer guidelines us
 
 <br/>
 
-# Experiment Unit 02: Suspend Functions - Kotlin Coroutines
+# Experiment Unit 03: Coroutine Contexts and Dispatchers - Kotlin Coroutines
 
-In this unit, I explored **suspend functions** in Kotlin Coroutines. Suspend functions are a key feature of coroutines that allow us to pause and resume tasks without blocking the main thread. This is especially useful for tasks like network calls or database operations.
+In this unit, I explored coroutine contexts and dispatchers in Kotlin Coroutines. Dispatchers define the thread or thread pool in which a coroutine runs, allowing us to control where tasks are executed. This is essential for tasks like network calls, database operations, and UI updates.
 
 <br/>
 
@@ -18,108 +18,88 @@ In this unit, I explored **suspend functions** in Kotlin Coroutines. Suspend fun
 
 ---
 
-
 #### Key Steps and Learnings:
 
-1. **What are Suspend Functions?**
-    - Suspend functions are special functions that can be paused and resumed.
+1. **What are Coroutine Contexts and Dispatchers?**
+    - **Coroutine Context**: Defines the environment in which a coroutine runs, including the thread or dispatcher.
    
-    - They can only be called from within a coroutine or another suspend function.
+    - **Dispatchers**: Specify the thread or thread pool for coroutine execution. Common dispatchers include:
    
-    - Example: The `delay` function is a suspend function.
-
-
-2. **Creating a Suspend Function**:
-    - I created a suspend function to simulate a network call:
-   
-      ```kotlin
-      suspend fun doNetworkCall(): String {
-          delay(2000L) // Simulate a 2-second network call
-          return "1st Network Call"
-      }
-      ```  
+        - **Dispatchers.Main**: Runs coroutines on the main thread (for UI updates).
       
-    - Another suspend function was created for a second network call:
-   
+        - **Dispatchers.IO**: Optimized for I/O operations (e.g., network calls, database access).
+      
+        - **Dispatchers.Default**: Used for CPU-intensive tasks (e.g., sorting, complex calculations).
+      
+        - **Dispatchers.Unconfined**: Not confined to a specific thread; resumes in the thread where the suspend function is called.
+      
+        - **newSingleThreadContext**: Creates a new single thread for coroutine execution.
+
+
+2. **Using Dispatchers in Coroutines**:
+    - I demonstrated how to launch coroutines with different dispatchers:
       ```kotlin
-      suspend fun doAnotherNetworkCall(): String {
-          delay(2000L) // Simulate another 2-second network call
-          return "2nd Network Call"
+      // Using Dispatchers.IO for network calls
+      GlobalScope.launch(Dispatchers.IO) {
+          Log.d(TAG, "COROUTINE | Thread : ${Thread.currentThread().name}")
+          val networkCallOne = doNetworkCall()
+          Log.d(TAG, networkCallOne)
+      }
+ 
+      // Using Dispatchers.Main for UI updates
+      GlobalScope.launch(Dispatchers.Main) {
+          Toast.makeText(context, "UI Update on Main Thread", Toast.LENGTH_LONG).show()
+      }
+ 
+      // Using newSingleThreadContext for custom thread
+      GlobalScope.launch(newSingleThreadContext("COROUTINE-THREAD")) {
+          Log.d(TAG, "COROUTINE | Thread : ${Thread.currentThread().name}")
       }
       ```  
 
-
-3. **Calling Suspend Functions in a Coroutine**:
-    - Suspend functions can only be called from within a coroutine.
+3. **Switching Contexts with `withContext`**:
+    - The `withContext` function allows us to switch the context of a coroutine.
    
-    - Example:
+    - Example: Performing a network call on a background thread and updating the UI on the main thread:
+   
       ```kotlin
-      fun testSuspendFunctions() {
-          GlobalScope.launch {
+      fun testCoroutineContexts(context: Context) {
+          GlobalScope.launch(Dispatchers.IO) {
               Log.d(TAG, "COROUTINE | Thread : ${Thread.currentThread().name}")
  
               val networkCallOne = doNetworkCall()
-              val networkCallTwo = doAnotherNetworkCall()
- 
               Log.d(TAG, networkCallOne)
-              Log.d(TAG, networkCallTwo)
+ 
+              withContext(Dispatchers.Main) {
+                  Toast.makeText(context, networkCallOne, Toast.LENGTH_LONG).show()
+              }
           }
       }
       ```  
 
-
 4. **Observing the Behavior**:
-    - When the coroutine runs, it logs:
-        - The thread it’s running on (e.g., `DefaultDispatcher-worker-1`).
+    - Logs show the coroutine running on different threads based on the dispatcher:
+        - `Dispatchers.IO`: Runs on a background thread (`DefaultDispatcher-worker-1`).
       
-        - The results of the two network calls after a total delay of 4 seconds.
+        - `Dispatchers.Main`: Runs on the main thread.
       
     - Logs:
-      <img src="./_archive/screenshots/log-02.png" />
-
-
-5. **Key Points About Suspend Functions**:
-    - **Non-blocking**: Suspend functions like `delay` pause the coroutine without blocking the thread.
+      ```
+      20:42:40.493  D  COROUTINE | Thread : DefaultDispatcher-worker-1
+      20:42:42.496  D  1st Network Call
+      ```  
+      
+    - Toast Message:
    
-    - **Sequential Execution**: If suspend functions are called one after another, their delays add up.
-   
-    - **Coroutine-Only**: Suspend functions cannot be called outside of a coroutine or another suspend function.
-
----
-
-#### Code Example:
-
-```kotlin
-fun testSuspendFunctions() {
-    GlobalScope.launch {
-        Log.d(TAG, "COROUTINE | Thread : ${Thread.currentThread().name}")
-
-        val networkCallOne = doNetworkCall()
-        val networkCallTwo = doAnotherNetworkCall()
-
-        Log.d(TAG, networkCallOne)
-        Log.d(TAG, networkCallTwo)
-    }
-}
-
-suspend fun doNetworkCall(): String {
-    delay(2000L) // Simulate a 2-second network call
-    return "1st Network Call"
-}
-
-suspend fun doAnotherNetworkCall(): String {
-    delay(2000L) // Simulate another 2-second network call
-    return "2nd Network Call"
-}
-```
+    <div align="center">
+    <img src="./_archive/screenshots/screen-02.png" width="320" />
+    </div>
 
 ---
 
 #### Key Takeaways:
-- **Suspend functions** are essential for performing long-running tasks in coroutines without blocking the main thread.
-
-- They can only be called from within a coroutine or another suspend function.
-
-- Suspend functions like `delay` are non-blocking, making them ideal for tasks like network calls or database operations.
+- **Dispatchers** control where coroutines run, ensuring tasks are executed on the appropriate thread.
+- **`withContext`** allows easy switching between contexts, making it simple to perform background tasks and update the UI.
+- **`newSingleThreadContext`** is useful for creating custom threads for specific tasks.
 
 ---
